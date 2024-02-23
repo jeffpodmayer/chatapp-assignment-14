@@ -9,9 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.coderscampus.chatapp.a14.domain.User;
+import com.coderscampus.chatapp.a14.domain.Channel;
 import com.coderscampus.chatapp.a14.repository.ChannelRepository;
-import com.coderscampus.chatapp.a14.repository.UserRepository;
 
 @SpringBootTest
 public class ChannelServiceTests {
@@ -24,10 +23,10 @@ public class ChannelServiceTests {
 	
 	@Test
 	public void testCreateChannel() {
-		User newChannel = new Channel(1L, "General");
+		Channel newChannel = new Channel(1L, "General");
 		
 		when(channelRepo.save(newChannel)).thenReturn(newChannel);
-		User savedChannel = channelService.saveUser(newChannel);
+		Channel savedChannel = channelService.saveChannel(newChannel);
 		
 		assertNotNull(savedChannel);
 		assertEquals("General", savedChannel.getChannelName());

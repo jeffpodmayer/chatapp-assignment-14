@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.coderscampus.chatapp.a14.domain.User;
+import com.coderscampus.chatapp.a14.domain.Channel;
 
 @Repository
 public class ChannelRepository {
