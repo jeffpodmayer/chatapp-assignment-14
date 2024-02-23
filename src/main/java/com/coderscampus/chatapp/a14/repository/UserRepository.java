@@ -15,4 +15,8 @@ public class UserRepository {
 		users.add(newUser);
 		return newUser;
 	}
+
+	public User findByUsername(String username) {
+		return null;
+	}
 }
