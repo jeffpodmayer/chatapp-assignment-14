@@ -1,7 +1,7 @@
 package com.coderscampus.chatapp.a14.repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -9,10 +9,10 @@ import com.coderscampus.chatapp.a14.domain.User;
 
 @Repository
 public class UserRepository {
-	private Map<Long, User> users = new HashMap<>();
+	private List<User> users = new ArrayList<>();
 
 	public User save(User newUser) {
-		users.put(newUser.getUserId(), newUser);
+		users.add(newUser);
 		return newUser;
 	}
 }
