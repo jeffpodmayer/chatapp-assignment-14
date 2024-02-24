@@ -22,7 +22,7 @@ public class ChannelServiceTests {
 	private ChannelService channelService;
 	
 	@Test
-	public void testCreateChannel() {
+	public void testCreateChannelAndChannelId() {
 		Channel newChannel = new Channel(1L, "General");
 		
 		when(channelRepo.save(newChannel)).thenReturn(newChannel);
@@ -30,6 +30,7 @@ public class ChannelServiceTests {
 		
 		assertNotNull(savedChannel);
 		assertEquals("General", savedChannel.getChannelName());
+		assertEquals(1L, savedChannel.getChannelId());
 		assertNotNull(savedChannel.getChannelId());
 		
 	}

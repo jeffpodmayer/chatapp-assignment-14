@@ -19,4 +19,8 @@ public class UserRepository {
 	public User findByUsername(String username) {
 		return null;
 	}
+
+	public List<User> findAll() {
+		return users;
+	}
 }

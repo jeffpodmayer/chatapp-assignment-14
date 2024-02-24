@@ -1,5 +1,7 @@
 package com.coderscampus.chatapp.a14.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,16 +10,23 @@ import com.coderscampus.chatapp.a14.repository.UserRepository;
 
 @Service
 public class UserService {
-	
-	@Autowired 
+
+	@Autowired
 	private UserRepository userRepo;
-	
+
 	public User saveUser(User user) {
 		return userRepo.save(user);
 	}
 
 	public User findbyUsername(String username) {
 		return userRepo.findByUsername(username);
-		
+
 	}
+
+	public Long assignUserId(User user) {
+		List<User> usersList = userRepo.findAll();
+		user.setUserId(usersList.size() + 1L);
+		return user.getUserId();
+	}
+
 }

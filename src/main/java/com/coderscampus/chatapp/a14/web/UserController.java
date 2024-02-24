@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.coderscampus.chatapp.a14.domain.Channel;
 import com.coderscampus.chatapp.a14.domain.User;
 import com.coderscampus.chatapp.a14.service.UserService;
 
@@ -19,8 +20,10 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/welcome")
-	public String getNewUser(ModelMap model) {
+	public String getWelcomePage(ModelMap model) {
 		User user = new User();
+		Channel channel = new Channel();
+		model.put("channel", channel);
 		model.put("user", user);
 		return "welcome";
 	}
@@ -30,8 +33,9 @@ public class UserController {
 	public User postNewUser(@RequestBody String username) {
 		User user = new User();
 		user.setUsername(username);
-		String userInfo = user.toString();
-		System.out.println(userInfo);
+		user.setUserId(userService.assignUserId(user));
+		String userInfo = user.toString(); //remove when complete
+		System.out.println(userInfo); //remove when complete
 		user = userService.saveUser(user);
 		return user;
 	}

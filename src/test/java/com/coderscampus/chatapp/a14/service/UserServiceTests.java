@@ -22,7 +22,7 @@ public class UserServiceTests {
 	private UserService userService;
 	
 	@Test
-	public void testCreateUser() {
+	public void testCreateUserAndUserId() {
 		User newUser = new User(1L,"Jeff");
 		
 		when(userRepo.save(newUser)).thenReturn(newUser);
@@ -30,8 +30,10 @@ public class UserServiceTests {
 		
 		assertNotNull(savedUser);
 		assertEquals("Jeff", savedUser.getUsername());
+		assertEquals(1L, savedUser.getUserId());
 		assertNotNull(savedUser.getUserId());
 		
 	}
+	
 	
 }
