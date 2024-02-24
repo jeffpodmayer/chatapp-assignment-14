@@ -18,15 +18,14 @@ public class UserService {
 		return userRepo.save(user);
 	}
 
-	public User findbyUsername(String username) {
-		return userRepo.findByUsername(username);
-
-	}
-
 	public Long assignUserId(User user) {
 		List<User> usersList = userRepo.findAll();
 		user.setUserId(usersList.size() + 1L);
 		return user.getUserId();
+	}
+
+	public User findbyUserId(Long userId) {
+		return userRepo.findById(userId);
 	}
 
 }

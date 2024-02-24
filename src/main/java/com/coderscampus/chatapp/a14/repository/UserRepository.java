@@ -2,6 +2,7 @@ package com.coderscampus.chatapp.a14.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +17,15 @@ public class UserRepository {
 		return newUser;
 	}
 
-	public User findByUsername(String username) {
-		return null;
-	}
-
 	public List<User> findAll() {
 		return users;
+	}
+
+	public User findById(Long userId) {
+		Optional<User> userOptional = users.stream()
+                .filter(user -> user.getUserId() == userId)
+                .findFirst();
+
+		return userOptional.orElse(null);
 	}
 }
