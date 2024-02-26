@@ -15,4 +15,5 @@ messageToSend.addEventListener('keydown', (event) => {
 			console.log("You sent a message");
 		}
 		}
+		//ADD fetch down here to send messages to server side
 	});

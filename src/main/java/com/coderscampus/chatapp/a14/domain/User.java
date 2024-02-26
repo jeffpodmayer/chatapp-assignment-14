@@ -10,14 +10,6 @@ public class User {
 		this.username = username;
 	}
 
-	public User() {
-	}
-
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + "]";
-	}
-
 	public Long getUserId() {
 		return userId;
 	}
@@ -32,6 +24,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public User() {
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + "]";
 	}
 
 }
