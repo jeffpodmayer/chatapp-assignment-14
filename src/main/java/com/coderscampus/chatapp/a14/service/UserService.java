@@ -25,7 +25,7 @@ public class UserService {
 	}
 	
 	public Long assignUserId() {
-		return userRepo.assignUserId();
+		return userRepo.generateUserId();
 		
 	}
 }

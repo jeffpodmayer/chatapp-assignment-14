@@ -26,11 +26,11 @@ public class UserController {
 
 	@PostMapping("/createUser")
 	@ResponseBody
-	public String createNewUser(@RequestBody String username, HttpSession session) {
-		User user = new User(userService.assignUserId(), username);
+	public User createNewUser(@RequestBody String username, HttpSession session) {
+		User user = new User(username);
 		userService.saveUser(user);
-		session.setAttribute("username", username);
-		return "welcome";
+		System.out.println(user.toString());
+		return user;
 	}
 
 }

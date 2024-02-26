@@ -1,14 +1,20 @@
 package com.coderscampus.chatapp.a14.domain;
 
 public class User {
+	private static Long nextUserId = 1L;
+	
 	private Long userId;
 	private String username;
 
-	public User(Long userId, String username) {
+	public User(String username) {
 		super();
-		this.userId = userId;
+		this.userId = generateUserId();
 		this.username = username;
 	}
+	
+	private static synchronized long generateUserId() {
+        return nextUserId++;
+    }
 
 	public Long getUserId() {
 		return userId;

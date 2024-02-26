@@ -23,7 +23,7 @@ public class UserServiceTests {
 	
 	@Test
 	public void testCreateUserAndUserId() {
-		User newUser = new User(userRepo.assignUserId(),"Jeff");
+		User newUser = new User("Jeff");
 		
 		when(userRepo.save(newUser)).thenReturn(newUser);
 		User savedUser = userService.saveUser(newUser);
