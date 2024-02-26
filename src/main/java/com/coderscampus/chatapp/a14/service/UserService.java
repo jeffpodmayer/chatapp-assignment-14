@@ -1,7 +1,5 @@
 package com.coderscampus.chatapp.a14.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +22,10 @@ public class UserService {
 	
 	public User findByUsername(String username) {
 		return userRepo.findByUsername(username);
+	}
+	
+	public Long assignUserId() {
+		return userRepo.assignUserId();
+		
 	}
 }

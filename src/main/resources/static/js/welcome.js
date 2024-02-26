@@ -1,6 +1,6 @@
 var username = prompt("What's your name?");
 
-fetch(`/saveUser`, {
+fetch(`/createUser`, {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
