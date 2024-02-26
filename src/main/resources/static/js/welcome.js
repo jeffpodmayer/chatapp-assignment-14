@@ -24,6 +24,7 @@ function createChannel(channelName){
     .then((data) => {
         const channelId = data.channelId;
         window.location.href = `/channel/${channelId}`
+        console.log(data);
     });
 	
 }

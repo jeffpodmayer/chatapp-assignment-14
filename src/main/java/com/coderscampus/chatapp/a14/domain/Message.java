@@ -3,7 +3,9 @@ package com.coderscampus.chatapp.a14.domain;
 import java.time.LocalDateTime;
 
 public class Message {
+	private Long messageId;
 	private User sender;
+	private Channel channel;
 	private String messageBody;
 	private LocalDateTime timeStamp;
 
@@ -41,6 +43,22 @@ public class Message {
 		this.sender = sender;
 		this.messageBody = messageBody;
 		this.timeStamp = timeStamp;
+	}
+
+	public Long getMessageId() {
+		return messageId;
+	}
+
+	public void setMessageId(Long messageId) {
+		this.messageId = messageId;
+	}
+
+	public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 	
 	
