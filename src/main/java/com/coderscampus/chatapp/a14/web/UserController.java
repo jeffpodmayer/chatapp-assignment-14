@@ -19,11 +19,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/welcome")
-	public String getWelcomePage(ModelMap model) {
-		return "welcome";
-	}
-
 	@PostMapping("/createUser")
 	@ResponseBody
 	public User createNewUser(@RequestBody String username, HttpSession session) {
@@ -31,6 +26,11 @@ public class UserController {
 		userService.saveUser(user);
 		System.out.println(user.toString());
 		return user;
+	}
+	
+	@GetMapping("/welcome")
+	public String getWelcomePage(ModelMap model) {
+		return "welcome";
 	}
 
 }

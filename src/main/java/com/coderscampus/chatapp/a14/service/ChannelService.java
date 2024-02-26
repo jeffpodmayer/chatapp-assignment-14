@@ -16,4 +16,17 @@ public class ChannelService {
 		return channelRepo.save(channel);
 	}
 	
+	public Channel findbyChannelId(Long channelId) {
+		return channelRepo.findByChannelId(channelId);
+	}
+	
+	public Channel findByChannelName(String channelName) {
+		return channelRepo.findByChannelName(channelName);
+	}
+	
+	public Long assignUserId() {
+		return channelRepo.generateChannelId();
+		
+	}
+	
 }

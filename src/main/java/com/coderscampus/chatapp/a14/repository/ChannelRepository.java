@@ -13,7 +13,20 @@ public class ChannelRepository {
 	private Map<Long, Channel> channels = new HashMap<>();
 
 	public Channel save(Channel newChannel) {
+		newChannel.setChannelId(generateChannelId());
 		channels.put(newChannel.getChannelId(), newChannel);
 		return newChannel;
+	}
+
+	public Channel findByChannelId(Long channelId) {
+		return channels.get(channelId);
+	}
+
+	public Channel findByChannelName(String channelName) {
+		return channels.values().stream().filter(channel -> channel.getChannelName().equals(channelName)).findFirst().orElse(null);
+	}
+
+	public synchronized Long generateChannelId() {
+		return channels.size() + 1L;
 	}
 }
