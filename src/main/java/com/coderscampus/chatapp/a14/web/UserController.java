@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.coderscampus.chatapp.a14.domain.User;
 import com.coderscampus.chatapp.a14.service.UserService;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class UserController {
 
@@ -21,24 +19,16 @@ public class UserController {
 
 	@PostMapping("/createUser")
 	@ResponseBody
-	public User createNewUser(@RequestBody String username, HttpSession session) {
+	public User createNewUser(@RequestBody String username) {
 		User user = new User(username);
 		userService.saveUser(user);
-		session.setAttribute("username", username);
-		session.setAttribute("userId", user.getUserId());
 		System.out.println(user.toString());
 		return user;
 	}
 
 	
 	@GetMapping("/welcome")
-	public String getWelcomePage(ModelMap model, HttpSession session) {
-		String username = (String) session.getAttribute("username");
-		
-		if(username == null) {
-			return "redirect:/createUser";
-		}
-	
+	public String getWelcomePage() {
 		return "welcome";
 	}
 
