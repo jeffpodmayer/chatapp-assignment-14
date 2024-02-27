@@ -29,6 +29,33 @@ function createChannel(channelName){
 	
 }
 
+//Karen's example JavaScript
+//a chunk of my js:
+//const messageForm = document.getElementById("messageForm");
+//    messageForm.addEventListener("submit", function(event) {
+//        event.preventDefault();
+//        const content = messageInput.value.trim();
+//        if (content) {
+//            const message = { sender: user, content };
+//            fetch(`/channels/${channelName}/sendMessage`, {
+//                method: "POST",
+//                headers: {
+//                    "Content-Type": "application/json"
+//var name = sessionStorage.getItem("userName");
+//
+//	if (name) {
+//		alert("Welcome back, " + name + "!");
+//	} else {
+//		name = prompt("Please enter your name", "John Doe");
+//		if (name) {
+//
+//			sessionStorage.setItem("userName", name);
+//			alert("Welcome, " + name + "!");
+//		} else {
+//			alert("Welcome!");
+//		}
+//	}
+
 
 
 
