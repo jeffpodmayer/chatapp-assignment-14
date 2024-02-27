@@ -1,5 +1,8 @@
 package com.coderscampus.chatapp.a14.web;
 
-public class MessageController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class MessageController {
+	
 }
