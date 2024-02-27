@@ -35,12 +35,27 @@ function createUser() {
 //CREATES A CHANNEL
 var channel = sessionStorage.getItem('channel');
 
-function createChannel() {
-	if (!channel) {
-		createChannel();
+function joinOrCreateChannel() {
+	if (channel != null) {
+		joinChannel(channel);
 	} else {
-		console.log("Channel already exists: " + channel);
+		createChannel();
 	}
+}
+
+function joinChannel(channelId) {
+	fetch(`/joinChannel/${channelId}`, {
+		method: "POST"
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			const channelId = data.channelId;
+			window.location.href = `/channel/${channelId}`;
+			console.log(data);
+		});
+}
+
+function createChannel() {
 	fetch(`/createChannel`, {
 		method: "POST"
 	})
@@ -51,7 +66,6 @@ function createChannel() {
 			window.location.href = `/channel/${channelId}`;
 			console.log(data);
 		});
-
 }
 
 //Karen's example JavaScript

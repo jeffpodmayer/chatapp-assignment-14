@@ -30,14 +30,27 @@ public class ChannelController {
 
 	@GetMapping("/channel/{channelId}")
 	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model, HttpSession session) {
-//		Channel channel = channelService.findbyChannelId(channelId);
-//		String username = (String) session.getAttribute("username");
-//		session.setAttribute("username", username);
-//		model.put("channel", channel);
-//		model.put("username", username);
-//		
-//		System.out.println(channel);
-//		System.out.println(username);
+		Channel channel = channelService.findbyChannelId(channelId);
+		String username = (String) session.getAttribute("username");
+		session.setAttribute("username", username);
+		model.put("channel", channel);
+		model.put("username", username);
+		
+		System.out.println(channel);
+		System.out.println(username);
 		return "channel";
 	}
+	
+	@PostMapping("/joinChannel/{channelId}")
+    @ResponseBody
+    public Channel joinChannel(@PathVariable Long channelId, ModelMap model) {
+        Channel channel = channelService.findbyChannelId(channelId);
+        if (channel == null) {
+            channel = new Channel();
+            channelService.saveChannel(channel);
+        }
+
+        System.out.println("Joined channel: " + channel);
+        return channel;
+    }
 }
