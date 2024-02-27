@@ -24,6 +24,8 @@ public class UserController {
 	public User createNewUser(@RequestBody String username, HttpSession session) {
 		User user = new User(username);
 		userService.saveUser(user);
+		session.setAttribute("username", username);
+		session.setAttribute("userId", user.getUserId());
 		System.out.println(user.toString());
 		return user;
 	}

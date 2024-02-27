@@ -4,5 +4,5 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class MessageController {
-	
+	//Create post request for send-message
 }

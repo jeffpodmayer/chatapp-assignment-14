@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.coderscampus.chatapp.a14.domain.Channel;
 import com.coderscampus.chatapp.a14.service.ChannelService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ChannelController {
 
@@ -27,14 +29,18 @@ public class ChannelController {
 		Long channelId = channel.getChannelId();
 		model.put("channelId", channelId);
 
-		System.out.println(channel.toString());
 		return channel;
 	}
 
 	@GetMapping("/channel/{channelId}")
-	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
+	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model, HttpSession session) {
 		Channel channel = channelService.findbyChannelId(channelId);
+		String username = (String) session.getAttribute("username");
 		model.put("channel", channel);
+		model.put("username", username);
+		
+		System.out.println(channel);
+		System.out.println(username);
 		return "channel";
 	}
 }
