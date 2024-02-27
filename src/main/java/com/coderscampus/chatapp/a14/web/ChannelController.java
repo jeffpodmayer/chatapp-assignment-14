@@ -36,6 +36,7 @@ public class ChannelController {
 	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model, HttpSession session) {
 		Channel channel = channelService.findbyChannelId(channelId);
 		String username = (String) session.getAttribute("username");
+		session.setAttribute("username", username);
 		model.put("channel", channel);
 		model.put("username", username);
 		

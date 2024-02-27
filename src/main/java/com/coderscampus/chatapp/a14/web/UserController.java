@@ -29,9 +29,16 @@ public class UserController {
 		System.out.println(user.toString());
 		return user;
 	}
+
 	
 	@GetMapping("/welcome")
-	public String getWelcomePage(ModelMap model) {
+	public String getWelcomePage(ModelMap model, HttpSession session) {
+		String username = (String) session.getAttribute("username");
+		
+		if(username == null) {
+			return "redirect:/createUser";
+		}
+	
 		return "welcome";
 	}
 
