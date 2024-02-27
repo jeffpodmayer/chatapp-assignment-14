@@ -2,7 +2,6 @@ package com.coderscampus.chatapp.a14.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,11 +21,10 @@ public class UserController {
 	public User createNewUser(@RequestBody String username) {
 		User user = new User(username);
 		userService.saveUser(user);
-		System.out.println(user.toString());
+//		System.out.println(user.toString());
 		return user;
 	}
 
-	
 	@GetMapping("/welcome")
 	public String getWelcomePage() {
 		return "welcome";

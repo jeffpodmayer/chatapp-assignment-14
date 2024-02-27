@@ -19,29 +19,25 @@ public class ChannelController {
 	@Autowired
 	private ChannelService channelService;
 
-	@PostMapping("/createChannel/{channelName}")
+	@PostMapping("/createChannel")
 	@ResponseBody
-	public Channel createNewChannel(@PathVariable String channelName, ModelMap model) {
+	public Channel createNewChannel() {
 		Channel channel = new Channel();
-		channel.setChannelName(channelName);
 		channelService.saveChannel(channel);
-
-		Long channelId = channel.getChannelId();
-		model.put("channelId", channelId);
-
+		System.out.println(channel);
 		return channel;
 	}
 
 	@GetMapping("/channel/{channelId}")
 	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model, HttpSession session) {
-		Channel channel = channelService.findbyChannelId(channelId);
-		String username = (String) session.getAttribute("username");
-		session.setAttribute("username", username);
-		model.put("channel", channel);
-		model.put("username", username);
-		
-		System.out.println(channel);
-		System.out.println(username);
+//		Channel channel = channelService.findbyChannelId(channelId);
+//		String username = (String) session.getAttribute("username");
+//		session.setAttribute("username", username);
+//		model.put("channel", channel);
+//		model.put("username", username);
+//		
+//		System.out.println(channel);
+//		System.out.println(username);
 		return "channel";
 	}
 }

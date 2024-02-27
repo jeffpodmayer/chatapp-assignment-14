@@ -1,3 +1,4 @@
+//CREATING A USER AND STORES IT IN THE SESSION AND SERVER SIDE
 //prompts the user for thier username
 console.log("Reading script.")
 var username = sessionStorage.getItem('username');
@@ -13,6 +14,7 @@ if (!username) {
 
 createUser();
 
+//createsUser
 //this gets called after the initial logic is completed
 function createUser() {
 	fetch(`/createUser`, {
@@ -26,23 +28,31 @@ function createUser() {
 		.then((data) => {
 			console.log(data);
 		});
-
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
 
-//creates a channel named General Channel
-//function createChannel(channelName){
-//	fetch(`/createChannel/${channelName}`, {
-//    method: "POST"
-//    })
-//    .then((response) => response.json())
-//    .then((data) => {
-//        const channelId = data.channelId;
-//        window.location.href = `/channel/${channelId}`
-//        console.log(data);
-//    });
-//	
-//}
+//CREATES A CHANNEL
+var channel = sessionStorage.getItem('channel');
+
+function createChannel() {
+	if (!channel) {
+		createChannel();
+	} else {
+		console.log("Channel already exists: " + channel);
+	}
+	fetch(`/createChannel`, {
+		method: "POST"
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			const channelId = data.channelId;
+			sessionStorage.setItem('channel', channelId);
+			window.location.href = `/channel/${channelId}`;
+			console.log(data);
+		});
+
+}
 
 //Karen's example JavaScript
 
@@ -56,21 +66,6 @@ function createUser() {
 //                method: "POST",
 //                headers: {
 //                    "Content-Type": "application/json"
-//var name = sessionStorage.getItem("userName");
-//
-//	if (name) {
-//		alert("Welcome back, " + name + "!");
-//	} else {
-//		name = prompt("Please enter your name", "John Doe");
-//		if (name) {
-//
-//			sessionStorage.setItem("userName", name);
-//			alert("Welcome, " + name + "!");
-//		} else {
-//			alert("Welcome!");
-//		}
-//	}
-
 
 
 
