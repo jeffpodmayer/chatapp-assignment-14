@@ -2,10 +2,10 @@ package com.coderscampus.chatapp.a14.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.coderscampus.chatapp.a14.domain.Channel;
 import com.coderscampus.chatapp.a14.domain.Message;
 
 @Repository
@@ -19,8 +19,7 @@ public class MessageRepository {
 		return message;
 	}
 	
-	public List<Message> findMessagesByChannelId(Long channelId) {
-		
+	public List<Message> findMessagesByChannelId(Channel channelId) {
 		return messages;
 	}
 
