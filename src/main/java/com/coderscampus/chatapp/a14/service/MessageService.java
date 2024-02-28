@@ -1,6 +1,6 @@
 package com.coderscampus.chatapp.a14.service;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,8 @@ public class MessageService {
 		return messageRepo.save(message);
 	}
 	
-	public Map<Long, Message> findAllMessages() {
-		return messageRepo.findAll();
-	}
-	public Message findByMessageId(Long messageId) {
-		return messageRepo.findMessageById(messageId);
+	public List<Message> findMessagesForChannel(Long channelId) {
+		return messageRepo.findMessagesByChannelId(channelId);
 	}
 	
 	public Long assignMessageId() {

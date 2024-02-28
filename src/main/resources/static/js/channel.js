@@ -43,6 +43,30 @@ function sendMessage() {
 
 }
 
+setInterval(() => {
+	fetch(`/getNewMessages/${channelId}`)
+		.then(response => response.json())
+		.then(data => {
+			displayNewMessages(data);
+		})
+		.catch(error => {
+			console.error('Error fetching new messages:', error);
+		});
+}, 500);
+
+function displayNewMessages(messages) {
+	messages.forEach(message => {
+		const messageElement = document.createElement('p');
+		messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
+		chatBox.append(messageElement);
+	});
+}
+
+
+
+
+
+//KAREN'S CODE
 //const messageForm = document.getElementById("messageForm");
 //    messageForm.addEventListener("submit", function(event) {
 //        event.preventDefault();

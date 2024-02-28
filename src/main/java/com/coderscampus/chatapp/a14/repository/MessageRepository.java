@@ -1,6 +1,7 @@
 package com.coderscampus.chatapp.a14.repository;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -10,20 +11,17 @@ import com.coderscampus.chatapp.a14.domain.Message;
 @Repository
 public class MessageRepository {
 
-	private Map<Long, Message> messages = new HashMap<>();
+	private List<Message> messages = new ArrayList<>();
 
 	public Message save(Message message) {
 		message.setMessageId(generateMessageId());
-		messages.put(message.getMessageId(), message);
+		messages.add(message);
 		return message;
 	}
 	
-	public Map<Long, Message> findAll() {
+	public List<Message> findMessagesByChannelId(Long channelId) {
+		
 		return messages;
-	}
-
-	public Message findMessageById(Long messageId) {
-		return messages.get(messageId);
 	}
 
 	public synchronized Long generateMessageId() {
