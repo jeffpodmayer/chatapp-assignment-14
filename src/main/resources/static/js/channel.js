@@ -43,14 +43,14 @@ function sendMessage() {
 
 }
 
-function displayNewMessages(messages) {
-	fetch(`/getNewMessages/${channelId}`)
+function displayNewMessages() {
+	fetch(`channel/getNewMessages/${channelId}`)
 		.then(response => response.json())
 		.then(messages.forEach(message => {
-				const messageElement = document.createElement('p');
-				messageElement.textContent = `${message.sender} : ${message.messageBody}`;
-				chatBox.append(messageElement);
-			}));
+			const messageElement = document.createElement('p');
+			messageElement.textContent = `${message.sender} : ${message.messageBody}`;
+			chatBox.append(messageElement);
+		}));
 }
 
 setInterval(displayNewMessages, 500);

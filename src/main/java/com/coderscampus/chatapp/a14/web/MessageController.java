@@ -26,10 +26,4 @@ public class MessageController {
 		System.out.println(message);
 		return message;
 	}
-	
-	@GetMapping("/getNewMessages/{channelId}")
-	public List<Message> getNewMessagesForChannel(@PathVariable Long channelId){
-		List<Message> messages = messageService.findMessagesForChannel(channelId);
-		return messages;
-	}
 }

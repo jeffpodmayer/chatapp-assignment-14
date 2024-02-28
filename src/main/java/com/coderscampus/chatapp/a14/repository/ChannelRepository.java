@@ -1,7 +1,7 @@
 package com.coderscampus.chatapp.a14.repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,15 +10,15 @@ import com.coderscampus.chatapp.a14.domain.Channel;
 @Repository
 public class ChannelRepository {
 
-	private Map<Long, Channel> channels = new HashMap<>();
+	private List<Channel> channels = new ArrayList<>();
 
 	public Channel save(Channel newChannel) {
 		newChannel.setChannelId(generateChannelId());
-		channels.put(newChannel.getChannelId(), newChannel);
+		channels.add(newChannel);
 		return newChannel;
 	}
 
-	public Channel findByChannelId(Long channelId) {
+	public Channel findByChannelId(int channelId) {
 		return channels.get(channelId);
 	}
 
