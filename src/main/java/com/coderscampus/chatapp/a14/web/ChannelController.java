@@ -42,7 +42,7 @@ public class ChannelController {
 
 	@PostMapping("/joinChannel/{channelId}/{username}")
 	@ResponseBody
-	public Channel joinChannel(@PathVariable Long channelId, String username, ModelMap model) {
+	public Channel joinChannel(@PathVariable Long channelId, @PathVariable String username, ModelMap model) {
 		Channel channel = channelService.findbyChannelId(channelId);
 		User currentUser = userService.findByUsername(username);
 		if (channel == null) {

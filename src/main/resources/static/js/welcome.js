@@ -50,6 +50,7 @@ function joinChannel(channelId, username) {
 		.then((response) => response.json())
 		.then((data) => {
 			const channelId = data.channelId;
+			sessionStorage.setItem('channel', channelId);
 			window.location.href = `/channel/${channelId}`;
 			console.log(data);
 		});

@@ -1,25 +1,30 @@
 var messageToSend = document.getElementById("messageBox");
 var chatBox = document.querySelector("#chatBox");
 var senderName = sessionStorage.getItem('username');
-var channelId = sessionStorage.getItem('channelId');
+var channelId = sessionStorage.getItem('channel');
 
 console.log(senderName);
 console.log(channelId);
 
 messageToSend.addEventListener('keydown', (event) => {
-		if (event.key === "Enter") {
-			event.preventDefault();
-			sendMessage();
-		}
-	});
+	if (event.key === "Enter") {
+		event.preventDefault();
+		sendMessage();
+	}
+});
 
 function sendMessage() {
-	var message = messageToSend.value.trim();
+	var message = {
+		sender: senderName,
+		channel: channelId,
+		messageBody: messageToSend.value.trim(),
+		timeStamp: new Date().toISOString()
+	};
 
-	if (message !== '') {
-		chatBox.innerHTML += '<p>' + '<strong>' + senderName + ": " +  '</strong>' + message + '</p>';
+	if (message.messageBody !== '') {
+		chatBox.innerHTML += '<p>' + '<strong>' + senderName + ": " + '</strong>' + message.messageBody + '</p>';
 		messageToSend.value = '';
-		
+
 		console.log("You sent a message");
 	}
 
