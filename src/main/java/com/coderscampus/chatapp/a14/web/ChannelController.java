@@ -39,7 +39,7 @@ public class ChannelController {
 	}
 
 	@GetMapping("/channel/{channelId}")
-	public String viewChannelByChannelId(@PathVariable int channelId, ModelMap model) {
+	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
 		Channel channel = channelService.findbyChannelId(channelId);
 		model.put("channel", channel);
 
@@ -49,7 +49,7 @@ public class ChannelController {
 
 	@PostMapping("/joinChannel/{channelId}")
 	@ResponseBody
-	public Channel joinChannel(@PathVariable int channelId, @PathVariable String username, ModelMap model) {
+	public Channel joinChannel(@PathVariable Long channelId, @PathVariable String username, ModelMap model) {
 		Channel channel = channelService.findbyChannelId(channelId);
 		User currentUser = userService.findByUsername(username);
 		if (channel == null) {
@@ -66,7 +66,7 @@ public class ChannelController {
 	}
 	
 	@GetMapping("channel/getNewMessages/{channelId}")
-	public List<Message> getNewMessagesForChannel(@PathVariable int channelId){
+	public List<Message> getNewMessagesForChannel(@PathVariable Long channelId){
 		List<Message> messages = messageService.findMessagesForChannel(channelId);
 		System.out.println(messages.toString());
 		return messages;

@@ -23,9 +23,9 @@ public class MessageService {
 		return messageRepo.save(message);
 	}
 	
-	public List<Message> findMessagesForChannel(int channelId) {
+	public List<Message> findMessagesForChannel(Long channelId) {
 		Channel channel = channelRepo.findByChannelId(channelId);
-		return messageRepo.findMessagesByChannelId(channel);
+		return channel.getMessages();
 	}
 	
 	public Long assignMessageId() {
