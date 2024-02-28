@@ -43,8 +43,8 @@ function joinOrCreateChannel() {
 	}
 }
 
-function joinChannel(channelId) {
-	fetch(`/joinChannel/${channelId}`, {
+function joinChannel(channelId, username) {
+	fetch(`/joinChannel/${channelId}/${username}`, {
 		method: "POST"
 	})
 		.then((response) => response.json())
@@ -70,16 +70,7 @@ function createChannel() {
 
 //Karen's example JavaScript
 
-//const messageForm = document.getElementById("messageForm");
-//    messageForm.addEventListener("submit", function(event) {
-//        event.preventDefault();
-//        const content = messageInput.value.trim();
-//        if (content) {
-//            const message = { sender: user, content };
-//            fetch(`/channels/${channelName}/sendMessage`, {
-//                method: "POST",
-//                headers: {
-//                    "Content-Type": "application/json"
+
 
 
 

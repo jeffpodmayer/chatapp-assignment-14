@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.chatapp.a14.domain.Channel;
+import com.coderscampus.chatapp.a14.domain.User;
 import com.coderscampus.chatapp.a14.service.ChannelService;
-
-import jakarta.servlet.http.HttpSession;
+import com.coderscampus.chatapp.a14.service.UserService;
 
 @Controller
 public class ChannelController {
@@ -19,7 +19,10 @@ public class ChannelController {
 	@Autowired
 	private ChannelService channelService;
 
-	@PostMapping("/createChannel")
+	@Autowired
+	private UserService userService;
+
+	@PostMapping("/createChannel/{channelName}")
 	@ResponseBody
 	public Channel createNewChannel() {
 		Channel channel = new Channel();
@@ -29,28 +32,29 @@ public class ChannelController {
 	}
 
 	@GetMapping("/channel/{channelId}")
-	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model, HttpSession session) {
+	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
 		Channel channel = channelService.findbyChannelId(channelId);
-		String username = (String) session.getAttribute("username");
-		session.setAttribute("username", username);
 		model.put("channel", channel);
-		model.put("username", username);
-		
+
 		System.out.println(channel);
-		System.out.println(username);
 		return "channel";
 	}
-	
-	@PostMapping("/joinChannel/{channelId}")
-    @ResponseBody
-    public Channel joinChannel(@PathVariable Long channelId, ModelMap model) {
-        Channel channel = channelService.findbyChannelId(channelId);
-        if (channel == null) {
-            channel = new Channel();
-            channelService.saveChannel(channel);
-        }
 
-        System.out.println("Joined channel: " + channel);
-        return channel;
-    }
+	@PostMapping("/joinChannel/{channelId}/{username}")
+	@ResponseBody
+	public Channel joinChannel(@PathVariable Long channelId, String username, ModelMap model) {
+		Channel channel = channelService.findbyChannelId(channelId);
+		User currentUser = userService.findByUsername(username);
+		if (channel == null) {
+			channel = new Channel();
+			channelService.saveChannel(channel);
+		}
+
+		model.put("username", currentUser);
+
+		System.out.println("Joined channel: " + channel);
+		System.out.println("Channel username is: " + username);
+
+		return channel;
+	}
 }

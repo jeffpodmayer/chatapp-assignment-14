@@ -21,7 +21,7 @@ public class UserController {
 	public User createNewUser(@RequestBody String username) {
 		User user = new User(username);
 		userService.saveUser(user);
-//		System.out.println(user.toString());
+		System.out.println(user.toString());
 		return user;
 	}
 
