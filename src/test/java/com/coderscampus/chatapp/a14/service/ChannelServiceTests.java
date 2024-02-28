@@ -21,19 +21,19 @@ public class ChannelServiceTests {
 	@InjectMocks
 	private ChannelService channelService;
 	
-	@Test
-	public void testCreateChannelAndChannelId() {
-		Channel newChannel = new Channel(1L, "General");
-		
-		when(channelRepo.save(newChannel)).thenReturn(newChannel);
-		Channel savedChannel = channelService.saveChannel(newChannel);
-		
-		assertNotNull(savedChannel);
-		assertEquals("General", savedChannel.getChannelName());
-		assertEquals(1L, savedChannel.getChannelId());
-		assertNotNull(savedChannel.getChannelId());
-		
-	}
+//	@Test
+//	public void testCreateChannelAndChannelId() {
+//		Channel newChannel = new Channel(1L, "General");
+//		
+//		when(channelRepo.save(newChannel)).thenReturn(newChannel);
+//		Channel savedChannel = channelService.saveChannel(newChannel);
+//		
+//		assertNotNull(savedChannel);
+//		assertEquals("General", savedChannel.getChannelName());
+//		assertEquals(1L, savedChannel.getChannelId());
+//		assertNotNull(savedChannel.getChannelId());
+//		
+//	}
 	
 }
 

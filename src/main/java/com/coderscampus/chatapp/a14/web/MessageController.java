@@ -16,7 +16,6 @@ public class MessageController {
 	@Autowired
 	private MessageService messageService;
 	
-	
 	@PostMapping("/sendMessage/{channelId}")
 	@ResponseBody
 	public Message createNewMessage(@RequestBody Message message, @PathVariable Long channelId) {

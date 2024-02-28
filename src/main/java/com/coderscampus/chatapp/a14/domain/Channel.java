@@ -4,9 +4,24 @@ import java.util.List;
 
 public class Channel {
 	private Long channelId;
-	private String channelName;
 	private List<User> users;
 	private List<Message> messages;
+
+	public Channel(Long channelId, List<User> users, List<Message> messages) {
+		super();
+		this.channelId = channelId;
+		this.users = users;
+		this.messages = messages;
+	}
+
+	@Override
+	public String toString() {
+		return "Channel [channelId=" + channelId + ", users=" + users + ", messages=" + messages + "]";
+	}
+
+	public Channel() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public List<User> getUsers() {
 		return users;
@@ -24,14 +39,6 @@ public class Channel {
 		this.messages = messages;
 	}
 
-	public String getChannelName() {
-		return channelName;
-	}
-
-	public void setChannelName(String channelName) {
-		this.channelName = channelName;
-	}
-
 	public Long getChannelId() {
 		return channelId;
 	}
@@ -40,17 +47,4 @@ public class Channel {
 		this.channelId = channelId;
 	}
 
-	public Channel(Long channelId, String channelName) {
-		super();
-		this.channelId = channelId;
-		this.channelName = channelName;
-	}
-
-	public Channel() {
-	}
-
-	@Override
-	public String toString() {
-		return "Channel [channelId=" + channelId + ", channelName=" + channelName + "]";
-	}
 }

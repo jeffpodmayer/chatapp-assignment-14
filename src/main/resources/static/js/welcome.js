@@ -33,23 +33,41 @@ function createUser() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 //CREATES A CHANNEL
-var channel = sessionStorage.getItem('channel');
+
+const channel = {
+	channelId: sessionStorage.getItem('channelId'),
+	users: [],
+	messages: []
+};
+
+function addUserToChannel(userId, username) {
+	const newUser = {
+		userId: userId,
+		username: username
+	};
+	channel.users.push(newUser);
+}
 
 function joinOrCreateChannel() {
-	if (channel != null) {
-		joinChannel(channel);
+	if (channel.channelId) {
+		joinChannel(channel.channelId, username);
 	} else {
 		createChannel();
 	}
 }
 
-function joinChannel(channelId, username) {
-	fetch(`/joinChannel/${channelId}/${username}`, {
-		method: "POST"
+function joinChannel(channelId) {
+	var username = sessionStorage.getItem('username');
+	fetch(`/joinChannel/${channelId}`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ username: username })
 	})
 		.then((response) => response.json())
 		.then((data) => {
-			const channelId = data.channelId;
+			addUserToChannel(data.userId, username);
 			sessionStorage.setItem('channel', channelId);
 			window.location.href = `/channel/${channelId}`;
 			console.log(data);
@@ -63,15 +81,12 @@ function createChannel() {
 		.then((response) => response.json())
 		.then((data) => {
 			const channelId = data.channelId;
+			addUserToChannel(data.userId, username);
 			sessionStorage.setItem('channel', channelId);
 			window.location.href = `/channel/${channelId}`;
 			console.log(data);
 		});
 }
-
-//Karen's example JavaScript
-
-
 
 
 

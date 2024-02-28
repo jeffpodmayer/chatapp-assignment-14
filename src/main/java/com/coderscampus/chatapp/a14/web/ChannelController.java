@@ -22,7 +22,7 @@ public class ChannelController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/createChannel/{channelName}")
+	@PostMapping("/createChannel")
 	@ResponseBody
 	public Channel createNewChannel() {
 		Channel channel = new Channel();
@@ -40,7 +40,7 @@ public class ChannelController {
 		return "channel";
 	}
 
-	@PostMapping("/joinChannel/{channelId}/{username}")
+	@PostMapping("/joinChannel/{channelId}")
 	@ResponseBody
 	public Channel joinChannel(@PathVariable Long channelId, @PathVariable String username, ModelMap model) {
 		Channel channel = channelService.findbyChannelId(channelId);
