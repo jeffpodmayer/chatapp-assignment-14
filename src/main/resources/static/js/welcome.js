@@ -34,14 +34,19 @@ function createUser() {
 
 //CREATES A CHANNEL
 function joinOrCreateChannel() {
-	if (!channelId) {
-		createChannel();
-	} else {
-		joinUserToChannel(channelId);
-	}
+	fetch('/getChannelId')
+		.then(response => response.json())
+		.then(data => {
+			console.log(data.channelId);
+
+			if (!channelId) {
+				createChannel();
+			} else {
+				joinUserToChannel(channelId);
+			}
+		});
+
 };
-
-
 function createChannel() {
 	fetch(`/createChannel`, {
 		method: "POST"

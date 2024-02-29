@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.chatapp.a14.domain.Channel;
@@ -43,6 +42,13 @@ public class ChannelController {
 		System.out.println("You are on channel:" + channel);
 		return "channel";
 	}
+	
+//	@GetMapping("/getChannelId")
+//	@ResponseBody
+//	public Channel getChannelId(@RequestParam Long channelId) {
+//		Channel channelIdToFind = channelService.findByChannelId(channelId);
+//		return channelIdToFind;
+//	}
 
 	@PostMapping("/joinChannel/{channelId}")
 	@ResponseBody
