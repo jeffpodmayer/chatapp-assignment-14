@@ -4,7 +4,7 @@ var chatBox = document.querySelector("#chatBox");
 
 var senderName = sessionStorage.getItem('username');
 var senderId = sessionStorage.getItem('userId');
-var channelId = sessionStorage.getItem('channel');
+var channelId = sessionStorage.getItem('channelId');
 
 console.log("Username: " + senderName);
 console.log("UserId: " + senderId);
@@ -51,17 +51,17 @@ function sendMessage() {
 
 }
 
-//function displayNewMessages(messages) {
-//	fetch(`channel/getNewMessages/${channelId}`)
-//		.then(response => response.json())
-//		.then(messages.forEach(message => {
-//			const messageElement = document.createElement('p');
-//			messageElement.textContent = `${message.sender} : ${message.messageBody}`;
-//			chatBox.append(messageElement);
-//		}));
-//}
-//
-//setInterval(displayNewMessages, 500);
+function displayNewMessages(messages) {
+	fetch(`channel/getNewMessages/${channelId}`)
+		.then(response => response.json())
+		.then(messages.forEach(message => {
+			const messageElement = document.createElement('p');
+			messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
+			chatBox.append(messageElement);
+		}));
+}
+
+setInterval(displayNewMessages, 500);
 
 
 
