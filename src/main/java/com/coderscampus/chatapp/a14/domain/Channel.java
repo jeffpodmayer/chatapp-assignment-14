@@ -14,6 +14,9 @@ public class Channel {
 		this.messages = messages;
 	}
 
+	public Channel() {
+	}
+
 	@Override
 	public String toString() {
 		return "Channel [channelId=" + channelId + ", users=" + users + ", messages=" + messages + "]";

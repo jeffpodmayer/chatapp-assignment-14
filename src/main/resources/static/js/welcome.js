@@ -34,7 +34,7 @@ function createUser() {
 
 //CREATES A CHANNEL
 function joinOrCreateChannel() {
-		var channelId = sessionStorage.getItem('channelId');
+	var channelId = sessionStorage.getItem('channelId');
 	if (!channelId) {
 		createChannel();
 	} else {
