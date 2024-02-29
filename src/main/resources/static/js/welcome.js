@@ -34,18 +34,12 @@ function createUser() {
 
 //CREATES A CHANNEL
 function joinOrCreateChannel() {
-	fetch('/getChannelId')
-		.then(response => response.json())
-		.then(data => {
-			console.log(data.channelId);
-
-			if (!channelId) {
-				createChannel();
-			} else {
-				joinUserToChannel(channelId);
-			}
-		});
-
+	var channelId = sessionStorage.getItem('channelId');
+	if (!channelId) {
+		createChannel();
+	} else {
+		joinUserToChannel(channelId);
+	}
 };
 function createChannel() {
 	fetch(`/createChannel`, {
@@ -53,13 +47,15 @@ function createChannel() {
 	})
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data);
 			const channelId = data.channelId;
 			sessionStorage.setItem('channelId', channelId);
 			console.log("Channel created and saved! ChannelId: " + channelId);
-			//			joinUserToChannel(channelId);
-			//			console.log("User has joined the channel.");
-			console.log(data);
+			joinUserToChannel(channelId);
+
+
 		});
+
 }
 
 function joinUserToChannel(channelId) {
