@@ -1,5 +1,4 @@
 //CREATING A USER AND STORES IT IN THE SESSION AND SERVER SIDE
-//prompts the user for thier username
 console.log("Reading script.")
 var username = sessionStorage.getItem('username');
 var userId = sessionStorage.getItem('userId');
@@ -15,8 +14,7 @@ if (!username) {
 
 createUser();
 
-//createsUser
-//this gets called after the initial logic is completed
+//CREATES A USER
 function createUser() {
 	fetch(`/createUser`, {
 		method: "POST",
@@ -30,13 +28,51 @@ function createUser() {
 			userId = data.userId;
 			sessionStorage.setItem('userId', userId);
 			console.log(data);
+			console.log("User sent and saved!");
 		});
 }
 
-/////////////////////////////////////////////////////////////////////////////////////
-
 //CREATES A CHANNEL
+function createChannel() {
+	fetch(`/createChannel`, {
+		method: "POST"
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			const channelId = data.channelId;
+			joinUserToChannel(channelId);
+			sessionStorage.setItem('channel', channelId);
+			window.location.href = `/channel/${channelId}`;
+			console.log(data);
+			console.log("Channel created and saved!");
+		});
+}
 
+function joinUserToChannel(channelId) {
+	var channelData = {
+		channelId: channelId,
+		users: [
+			{ userId: userId, username: username }
+			]
+	};
+
+	fetch(`/joinChannel/${channelId}`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(channelData)
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			window.location.href = `/channel/${channelId}`;
+			console.log(data);
+			console.log("User joined to channel!")
+		});
+}
+
+
+//OLD JAVA SCRIPT CODE -- Don't think that I need this...
 //const channel = {
 //	channelId: sessionStorage.getItem('channelId'),
 //	users: [],
@@ -58,46 +94,6 @@ function createUser() {
 //		createChannel();
 //	}
 //}
-
-
-function createChannel() {
-	fetch(`/createChannel`, {
-		method: "POST"
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			const channelId = data.channelId;
-			joinUserToChannel(channelId);
-			sessionStorage.setItem('channel', channelId);
-			window.location.href = `/channel/${channelId}`;
-			console.log(data);
-		});
-}
-
-function joinUserToChannel(channelId) {
-//	var username = sessionStorage.getItem('username');
-	var channelData = {
-		channelId: channelId,
-		users: [
-			{ userId: userId, username: username }
-			]
-	};
-
-	fetch(`/joinChannel/${channelId}`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify(channelData)
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			window.location.href = `/channel/${channelId}`;
-			console.log(data);
-		});
-}
-
-
 
 
 

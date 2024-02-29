@@ -46,6 +46,7 @@ function sendMessage() {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
+			console.log("Message saved on server side!")
 		});
 
 }
