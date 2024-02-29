@@ -33,6 +33,14 @@ function createUser() {
 }
 
 //CREATES A CHANNEL
+function joinOrCreateChannel() {
+		var channelId = sessionStorage.getItem('channelId');
+	if (!channelId) {
+		createChannel();
+	} else {
+		joinUserToChannel(channelId);
+	}
+};
 function createChannel() {
 	fetch(`/createChannel`, {
 		method: "POST"
@@ -40,11 +48,11 @@ function createChannel() {
 		.then((response) => response.json())
 		.then((data) => {
 			const channelId = data.channelId;
-			joinUserToChannel(channelId);
-			sessionStorage.setItem('channel', channelId);
-			window.location.href = `/channel/${channelId}`;
-			console.log(data);
+			sessionStorage.setItem('channelId', channelId);
 			console.log("Channel created and saved!");
+			joinUserToChannel(channelId);
+			console.log("User has joined the channel.");
+			console.log(data);
 		});
 }
 
@@ -65,9 +73,10 @@ function joinUserToChannel(channelId) {
 	})
 		.then((response) => response.json())
 		.then((data) => {
+			var channelId = channelData.channelId;
 			window.location.href = `/channel/${channelId}`;
+			console.log("User joined to channel!");
 			console.log(data);
-			console.log("User joined to channel!")
 		});
 }
 
@@ -87,13 +96,7 @@ function joinUserToChannel(channelId) {
 //	channel.users.push(newUser);
 //}
 
-//function joinOrCreateChannel() {
-//	if (channel.channelId) {
-//		joinUserToChannel(channel.channelId);
-//	} else {
-//		createChannel();
-//	}
-//}
+
 
 
 

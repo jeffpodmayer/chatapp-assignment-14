@@ -36,7 +36,7 @@ public class ChannelController {
 
 	@GetMapping("/channel/{channelId}")
 	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
-		Channel channel = channelService.findbyChannelId(channelId);
+		Channel channel = channelService.findByChannelId(channelId);
 		model.put("channel", channel);
 		System.out.println("You are on channel:" + channel);
 		return "channel";
@@ -45,15 +45,15 @@ public class ChannelController {
 	@PostMapping("/joinChannel/{channelId}")
 	@ResponseBody
 	public Channel joinChannel(@RequestBody Channel channelData, @PathVariable Long channelId) {
-		Channel channel = channelService.findbyChannelId(channelId);
-		List<User> username = channelData.getUsers();
+		Channel channel = channelData;
+		List<User> users = channelData.getUsers();
 		
 		if (channel == null) {
 			System.out.println(channel);
 		}
 		
 		System.out.println("Joined channel: " + channel);
-		System.out.println("Channel username is: " + username);
+		System.out.println("Channel username is: " + users);
 
 		return channel;
 	}

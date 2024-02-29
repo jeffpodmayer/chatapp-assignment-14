@@ -16,6 +16,7 @@ public class ChannelRepository {
 		newChannel.setChannelId(generateChannelId());
 		newChannel.setUsers(new ArrayList<>());
         newChannel.setMessages(new ArrayList<>());
+        channels.add(newChannel);
 		return newChannel;
 	}
 
