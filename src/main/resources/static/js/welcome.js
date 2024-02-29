@@ -2,6 +2,7 @@
 //prompts the user for thier username
 console.log("Reading script.")
 var username = sessionStorage.getItem('username');
+var userId = sessionStorage.getItem('userId');
 
 if (!username) {
 	console.log("Prompting for username.")
@@ -26,6 +27,8 @@ function createUser() {
 	})
 		.then((response) => response.json())
 		.then((data) => {
+			userId = data.userId;
+			sessionStorage.setItem('userId', userId);
 			console.log(data);
 		});
 }
@@ -87,6 +90,11 @@ function createChannel() {
 			console.log(data);
 		});
 }
+
+
+
+
+
 
 
 

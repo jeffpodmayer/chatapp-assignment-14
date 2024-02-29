@@ -20,8 +20,8 @@ public class UserService {
 		return userRepo.findById(userId);
 	}
 	
-	public User findByUsername(String username) {
-		return userRepo.findByUsername(username);
+	public User findByUsername(User sender) {
+		return userRepo.findByUsername(sender);
 	}
 	
 	public Long assignUserId() {

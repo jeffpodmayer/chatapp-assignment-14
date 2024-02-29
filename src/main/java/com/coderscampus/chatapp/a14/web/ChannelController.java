@@ -29,6 +29,8 @@ public class ChannelController {
 	@Autowired
 	private MessageService messageService;
 
+	
+	
 	@PostMapping("/createChannel")
 	@ResponseBody
 	public Channel createNewChannel() {
@@ -42,14 +44,13 @@ public class ChannelController {
 	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
 		Channel channel = channelService.findbyChannelId(channelId);
 		model.put("channel", channel);
-
-		System.out.println(channel);
+		//System.out.println(channel);
 		return "channel";
 	}
 
 	@PostMapping("/joinChannel/{channelId}")
 	@ResponseBody
-	public Channel joinChannel(@PathVariable Long channelId, @PathVariable String username, ModelMap model) {
+	public Channel joinChannel(@PathVariable Long channelId, @PathVariable User username, ModelMap model) {
 		Channel channel = channelService.findbyChannelId(channelId);
 		User currentUser = userService.findByUsername(username);
 		if (channel == null) {

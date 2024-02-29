@@ -16,8 +16,8 @@ public class UserRepository {
 		return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst().orElse(null);
 	}
 
-	public User findByUsername(String username) {
-		return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
+	public User findByUsername(User sender) {
+		return users.stream().filter(user -> user.getUsername().equals(sender)).findFirst().orElse(null);
 	}
 
 	public List<User> findAll() {

@@ -1,12 +1,14 @@
 var messageToSend = document.getElementById("messageBox");
+
 var chatBox = document.querySelector("#chatBox");
+
 var senderName = sessionStorage.getItem('username');
 var senderId = sessionStorage.getItem('userId');
 var channelId = sessionStorage.getItem('channel');
 
-console.log(senderName);
-console.log(senderId);
-console.log(channelId);
+console.log("Username: " + senderName);
+console.log("UserId: " + senderId);
+console.log("Channel ID: " + channelId);
 
 messageToSend.addEventListener('keydown', (event) => {
 	if (event.key === "Enter") {
@@ -17,7 +19,10 @@ messageToSend.addEventListener('keydown', (event) => {
 
 function sendMessage() {
 	var message = {
-		sender: senderName,
+		sender: {
+			userId: senderId, 
+			username : senderName
+			},
 		channel: channelId,
 		messageBody: messageToSend.value.trim(),
 		timeStamp: new Date().toISOString()
