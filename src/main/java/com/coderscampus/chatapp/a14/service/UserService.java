@@ -20,12 +20,17 @@ public class UserService {
 		return userRepo.findById(userId);
 	}
 	
-	public User findByUsername(User sender) {
+	public User findByUsername(User sender) {// DUPLICATE
 		return userRepo.findByUsername(sender);
 	}
 	
 	public Long assignUserId() {
 		return userRepo.generateUserId();
 		
+	}
+
+	public User findByUsername(String username) { //DUPLICATE
+		// TODO Auto-generated method stub
+		return userRepo.findByUsername(username);
 	}
 }

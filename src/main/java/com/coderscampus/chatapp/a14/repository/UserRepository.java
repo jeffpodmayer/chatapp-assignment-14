@@ -16,7 +16,7 @@ public class UserRepository {
 		return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst().orElse(null);
 	}
 
-	public User findByUsername(User sender) {
+	public User findByUsername(User sender) {//DUPLICATE
 		return users.stream().filter(user -> user.getUsername().equals(sender)).findFirst().orElse(null);
 	}
 
@@ -32,6 +32,10 @@ public class UserRepository {
 
 	public synchronized Long generateUserId() {
 		return users.size() + 1L;
+	}
+
+	public User findByUsername(String username) { //DUPLICATE
+		return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
 	}
 
 }

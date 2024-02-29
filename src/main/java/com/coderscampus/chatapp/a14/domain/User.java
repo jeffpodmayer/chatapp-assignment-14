@@ -12,6 +12,10 @@ public class User {
 		this.username = username;
 	}
 	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private static synchronized long generateUserId() {
         return nextUserId++;
     }
