@@ -19,10 +19,6 @@ public class Channel {
 		return "Channel [channelId=" + channelId + ", users=" + users + ", messages=" + messages + "]";
 	}
 
-	public Channel() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public List<User> getUsers() {
 		return users;
 	}
