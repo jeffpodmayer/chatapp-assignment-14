@@ -102,11 +102,4 @@ public class ChannelController {
 //		return channelIdToFind;
 //		}
 //	}
-
-//	@GetMapping("/channel/getNewMessages/{channelId}")
-//	public List<Message> getNewMessagesForChannel(@PathVariable Long channelId) {
-//		List<Message> messages = messageService.findMessagesForChannel(channelId);
-//		System.out.println(messages.toString());
-//		return messages;
-//	}
 }

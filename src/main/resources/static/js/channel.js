@@ -34,52 +34,33 @@ function sendMessage() {
 
 		console.log("You sent a message");
 	}
-
-
-//	fetch(`/sendMessage/${channelId}`, {
-//		method: "POST",
-//		headers: {
-//			"Content-Type": "application/json"
-//		},
-//		body: JSON.stringify(message)
-//	})
-//		.then((response) => response.json())
-//		.then((data) => {
-//			console.log(data);
-//			console.log("Message saved on server side!")
-//		});
+	
+	fetch(`/sendMessage/${channelId}`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(message)
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data);
+			console.log("Message saved on server side!")
+		});
 
 }
 
-//function displayNewMessages(messages) {
-//	fetch(`channel/getNewMessages/${channelId}`)
-//		.then(response => response.json())
-//		.then(messages.forEach(message => {
-//			const messageElement = document.createElement('p');
-//			messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
-//			chatBox.append(messageElement);
-//		}));
-//}
-//
-//setInterval(displayNewMessages, 500);
+function displayNewMessages(messages) {
+	fetch(`/getNewMessages/${channelId}`)
+		.then(response => response.json())
+		.then(messages.forEach(message => {
+			const messageElement = document.createElement('p');
+			messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
+			chatBox.append(messageElement);
+		}));
+}
+
+setInterval(displayNewMessages, 1000);
 
 
-
-
-
-
-
-
-
-//KAREN'S CODE
-//const messageForm = document.getElementById("messageForm");
-//    messageForm.addEventListener("submit", function(event) {
-//        event.preventDefault();
-//        const content = messageInput.value.trim();
-//        if (content) {
-//            const message = { sender: user, content };
-//            fetch(`/channels/${channelName}/sendMessage`, {
-//                method: "POST",
-//                headers: {
-//                    "Content-Type": "application/json"
 
