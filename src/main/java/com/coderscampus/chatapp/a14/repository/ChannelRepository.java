@@ -17,8 +17,6 @@ public class ChannelRepository {
 		newChannel.setUsers(new ArrayList<>());
         newChannel.setMessages(new ArrayList<>());
         channels.add(newChannel);
-        System.out.println("Saved channel; " + newChannel.toString());
-        System.out.println("Channels in the list are: " + channels.toString());
 		return newChannel;
 	}
 

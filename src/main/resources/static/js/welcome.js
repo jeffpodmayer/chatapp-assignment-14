@@ -34,109 +34,40 @@ function createUser() {
 		});
 }
 
-//CREATES A CHANNEL
-function joinOrCreateChannel() {
-	fetch('/getChannelId')
-		.then(response => response.json())
-		.then(data => {
-			const channelId = data.channelId;
-			console.log(data.channelId);
-
-			if (!channelId) {
-				createChannel();
-			} else {
-				joinChannel(channelId);
-			}
-		});
+//CREATES THE GENERAL CHANNEL & JOINS IT
+function joinOrCreateGeneralChannel() {
+    fetch('/joinOrCreateGeneralChannel?username=' + username, {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+        const channelId = data.channelId;
+        sessionStorage.setItem('channelId', channelId);
+        console.log("User has joined the channel!");
+        console.log(data);
+        joinChannel(channelId);
+    });
 }
 
+function joinChannel(channelId) {
+		var channelData = {
+			channelId: channelId,
+			users: [
+				{ userId: userId, username: username }
+			]
+		};
 
-function createChannel() {
-	console.log("Create channel function.");
-	fetch(`/createChannel`, {
-		method: "POST"
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			console.log(data);
-			const channelId = data.channelId;
-			sessionStorage.setItem('channelId', channelId);
-			console.log("Channel created and saved! ChannelId: " + channelId);
-			joinChannel(channelId);
-		});
-
+		fetch(`/joinChannel/${channelId}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(channelData)
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				var channelId = channelData.channelId;
+				window.location.href = `/channel/${channelId}`;
+				console.log(data);
+			});
 }
-
-function joinChannel() {
-	console.log("In the join channel function.")
-	//	var channelData = {
-	//		channelId: channelId,
-	//		users: [
-	//			{ userId: userId, username: username }
-	//		]
-	//	};
-
-	//	fetch(`/joinChannel/${channelId}`, {
-	//		method: "POST",
-	//		headers: {
-	//			"Content-Type": "application/json"
-	//		},
-	//		body: JSON.stringify(channelData)
-	//	})
-	//		.then((response) => response.json())
-	//		.then((data) => {
-	//			var channelId = channelData.channelId;
-	//			window.location.href = `/channel/${channelId}`;
-	//			console.log("User joined to channel!");
-	//			console.log(data);
-	//		});
-}
-
-
-//OLD JAVA SCRIPT CODE -- Don't think that I need this...
-//const channel = {
-//	channelId: sessionStorage.getItem('channelId'),
-//	users: [],
-//	messages: []
-//};
-
-//function addUserToChannel(userId, username) {
-//	const newUser = {
-//		userId: userId,
-//		username: username
-//	};
-//	channel.users.push(newUser);
-//}
-
-
-
-
-
-
-
-
-
-//TO MAKE EACH TAB SESSION INDPENDENT --> From ChatGPT
-//var sessionId = sessionStorage.getItem('sessionId');
-//if (!sessionId) {
-//    sessionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-//    sessionStorage.setItem('sessionId', sessionId);
-//}
-//
-//// Use the session ID in the storage key
-//var username = sessionStorage.getItem('username_' + sessionId);
-//
-//if (!username) {
-//    console.log("Prompting for username.");
-//    username = prompt("Enter your username:");
-//    sessionStorage.setItem('username_' + sessionId, username);
-//    alert("Welcome back, " + username);
-//} else {
-//    alert("Welcome back, " + username);
-//}
-//
-//createUser();
-
-
-
-

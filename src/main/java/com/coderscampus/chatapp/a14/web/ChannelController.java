@@ -16,6 +16,7 @@ import com.coderscampus.chatapp.a14.domain.Channel;
 //import com.coderscampus.chatapp.a14.domain.Message;
 import com.coderscampus.chatapp.a14.domain.User;
 import com.coderscampus.chatapp.a14.service.ChannelService;
+import com.coderscampus.chatapp.a14.service.UserService;
 //import com.coderscampus.chatapp.a14.service.MessageService;
 
 @Controller
@@ -24,51 +25,82 @@ public class ChannelController {
 	@Autowired
 	private ChannelService channelService;
 
+	@Autowired
+	private UserService userService;
+	
 //	@Autowired
 //	private MessageService messageService;
 
 	@PostMapping("/createChannel")
-	@ResponseBody
 	public Channel createNewChannel() {
 		Channel channel = new Channel();
 		channelService.saveChannel(channel);
 		return channel;
 	}
-
-//	@GetMapping("/channel/{channelId}")
-//	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
-//		Channel channel = channelService.findByChannelId(channelId);
-//		model.put("channel", channel);
-//		System.out.println("You are on channel:" + channel);
-//		return "channel";
-//	}
 	
-	@GetMapping("/getChannelId")
+	@PostMapping("/joinOrCreateGeneralChannel")
 	@ResponseBody
-	public Channel getChannelId(@RequestParam Long channelId) {
-		if(channelId == null) {
-			return null;
+	public Channel joinOrCreateGeneralChannel(@RequestParam String username) {
+		// Check if a channel exists
+		Channel existingChannel = channelService.findByChannelId(1L);
+
+		if (existingChannel == null) {
+
+			// If no channel exists, create a new one;
+			System.out.println("Creating a General Channel!");
+			Channel newChannel = createNewChannel();
+
+			// Add the user to the new channel
+			User user = userService.findByUsername(username);
+			newChannel.getUsers().add(user);
+
+			System.out.println(newChannel.toString());
+
+			return newChannel;
+
 		} else {
-		Channel channelIdToFind = channelService.findByChannelId(channelId);
-		System.out.println("Channel found is: " + channelIdToFind);
-		return channelIdToFind;
+			System.out.println("Adding a user to the General Channel.");
+			User user = userService.findByUsername(username);
+			existingChannel.getUsers().add(user);
+
+			System.out.println(existingChannel.toString());
+			return existingChannel;
 		}
 	}
 
-//	@PostMapping("/joinChannel/{channelId}")
+	//GETS THE MODEL 
+	@GetMapping("/channel/{channelId}")
+	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
+		Channel channel = channelService.findByChannelId(channelId);
+		model.put("channel", channel);
+		return "channel";
+	}
+	//POSTS THE CHANNEL DATA FROM THE JS: joinChannel(channelId) function
+	@PostMapping("/joinChannel/{channelId}")
+	@ResponseBody
+	public Channel joinChannel(@RequestBody Channel channelData, @PathVariable Long channelId) {
+		Channel channel = channelData;
+		
+		if (channel == null) {
+			System.out.println(channel);
+		}
+		return channel;
+	}
+
+	
+	
+	
+
+//	@GetMapping("/getChannelId")
 //	@ResponseBody
-//	public Channel joinChannel(@RequestBody Channel channelData, @PathVariable Long channelId) {
-//		Channel channel = channelData;
-//		List<User> users = channelData.getUsers();
-//		
-//		if (channel == null) {
-//			System.out.println(channel);
+//	public Channel getChannelId(@RequestParam Long channelId) {
+//		if(channelId == null) {
+//			return null;
+//		} else {
+//		Channel channelIdToFind = channelService.findByChannelId(channelId);
+//		System.out.println("Channel found is: " + channelIdToFind);
+//		return channelIdToFind;
 //		}
-//		
-//		System.out.println("Joined channel: " + channel);
-//		System.out.println("Channel username is: " + users);
-//
-//		return channel;
 //	}
 
 //	@GetMapping("/channel/getNewMessages/{channelId}")

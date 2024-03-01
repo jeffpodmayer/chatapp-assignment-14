@@ -34,9 +34,9 @@ public class UserRepository {
 	public synchronized Long generateUserId() {
 		return users.size() + 1L;
 	}
-//
-//	public User findByUsername(String username) { //DUPLICATE
-//		return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
-//	}
+
+	public User findByUsername(String username) { //DUPLICATE
+		return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
+	}
 
 }

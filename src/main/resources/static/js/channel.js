@@ -6,9 +6,9 @@ var senderName = sessionStorage.getItem('username');
 var senderId = sessionStorage.getItem('userId');
 var channelId = sessionStorage.getItem('channelId');
 
-console.log("Username: " + senderName);
-console.log("UserId: " + senderId);
-console.log("Channel ID: " + channelId);
+console.log("User on channel: " + senderName);
+console.log("UserId of User on channel: " + senderId);
+console.log("Current Channel you are on: " + channelId);
 
 messageToSend.addEventListener('keydown', (event) => {
 	if (event.key === "Enter") {
@@ -36,32 +36,32 @@ function sendMessage() {
 	}
 
 
-	fetch(`/sendMessage/${channelId}`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify(message)
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			console.log(data);
-			console.log("Message saved on server side!")
-		});
+//	fetch(`/sendMessage/${channelId}`, {
+//		method: "POST",
+//		headers: {
+//			"Content-Type": "application/json"
+//		},
+//		body: JSON.stringify(message)
+//	})
+//		.then((response) => response.json())
+//		.then((data) => {
+//			console.log(data);
+//			console.log("Message saved on server side!")
+//		});
 
 }
 
-function displayNewMessages(messages) {
-	fetch(`channel/getNewMessages/${channelId}`)
-		.then(response => response.json())
-		.then(messages.forEach(message => {
-			const messageElement = document.createElement('p');
-			messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
-			chatBox.append(messageElement);
-		}));
-}
-
-setInterval(displayNewMessages, 500);
+//function displayNewMessages(messages) {
+//	fetch(`channel/getNewMessages/${channelId}`)
+//		.then(response => response.json())
+//		.then(messages.forEach(message => {
+//			const messageElement = document.createElement('p');
+//			messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
+//			chatBox.append(messageElement);
+//		}));
+//}
+//
+//setInterval(displayNewMessages, 500);
 
 
 

@@ -28,8 +28,7 @@ public class UserService {
 //		return userRepo.findByUsername(sender);
 //	}
 	
-//	public User findByUsername(String username) { //DUPLICATE
-//		// TODO Auto-generated method stub
-//		return userRepo.findByUsername(username);
-//	}
+	public User findByUsername(String username) { //DUPLICATE
+		return userRepo.findByUsername(username);
+	}
 }
