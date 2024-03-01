@@ -17,6 +17,8 @@ public class ChannelRepository {
 		newChannel.setUsers(new ArrayList<>());
         newChannel.setMessages(new ArrayList<>());
         channels.add(newChannel);
+        System.out.println("Saved channel; " + newChannel.toString());
+        System.out.println("Channels in the list are: " + channels.toString());
 		return newChannel;
 	}
 
@@ -26,6 +28,10 @@ public class ChannelRepository {
 			return channel;
 		}
 		return null;
+	}
+	
+	public List<Channel> findAll() {
+		return channels;
 	}
 
 	public synchronized Long generateChannelId() {

@@ -1,4 +1,5 @@
 //CREATING A USER AND STORES IT IN THE SESSION AND SERVER SIDE
+
 console.log("Reading script.")
 var username = sessionStorage.getItem('username');
 var userId = sessionStorage.getItem('userId');
@@ -6,13 +7,12 @@ var userId = sessionStorage.getItem('userId');
 if (!username) {
 	console.log("Prompting for username.")
 	username = prompt("Enter your username: ");
-	sessionStorage.setItem('username', username);
-	alert("Welcome back, " + username);
+	createUser();
 } else {
 	alert("Welcome back, " + username);
 }
 
-createUser();
+
 
 //CREATES A USER
 function createUser() {
@@ -26,6 +26,8 @@ function createUser() {
 		.then((response) => response.json())
 		.then((data) => {
 			userId = data.userId;
+			username = data.username;
+			sessionStorage.setItem('username', username);
 			sessionStorage.setItem('userId', userId);
 			console.log(data);
 			console.log("User sent and saved!");
@@ -34,14 +36,23 @@ function createUser() {
 
 //CREATES A CHANNEL
 function joinOrCreateChannel() {
-	var channelId = sessionStorage.getItem('channelId');
-	if (!channelId) {
-		createChannel();
-	} else {
-		joinUserToChannel(channelId);
-	}
-};
+	fetch('/getChannelId')
+		.then(response => response.json())
+		.then(data => {
+			const channelId = data.channelId;
+			console.log(data.channelId);
+
+			if (!channelId) {
+				createChannel();
+			} else {
+				joinChannel(channelId);
+			}
+		});
+}
+
+
 function createChannel() {
+	console.log("Create channel function.");
 	fetch(`/createChannel`, {
 		method: "POST"
 	})
@@ -51,35 +62,34 @@ function createChannel() {
 			const channelId = data.channelId;
 			sessionStorage.setItem('channelId', channelId);
 			console.log("Channel created and saved! ChannelId: " + channelId);
-			joinUserToChannel(channelId);
-
-
+			joinChannel(channelId);
 		});
 
 }
 
-function joinUserToChannel(channelId) {
-	var channelData = {
-		channelId: channelId,
-		users: [
-			{ userId: userId, username: username }
-		]
-	};
+function joinChannel() {
+	console.log("In the join channel function.")
+	//	var channelData = {
+	//		channelId: channelId,
+	//		users: [
+	//			{ userId: userId, username: username }
+	//		]
+	//	};
 
-	fetch(`/joinChannel/${channelId}`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify(channelData)
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			var channelId = channelData.channelId;
-			window.location.href = `/channel/${channelId}`;
-			console.log("User joined to channel!");
-			console.log(data);
-		});
+	//	fetch(`/joinChannel/${channelId}`, {
+	//		method: "POST",
+	//		headers: {
+	//			"Content-Type": "application/json"
+	//		},
+	//		body: JSON.stringify(channelData)
+	//	})
+	//		.then((response) => response.json())
+	//		.then((data) => {
+	//			var channelId = channelData.channelId;
+	//			window.location.href = `/channel/${channelId}`;
+	//			console.log("User joined to channel!");
+	//			console.log(data);
+	//		});
 }
 
 
