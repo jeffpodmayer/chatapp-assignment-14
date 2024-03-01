@@ -1,5 +1,7 @@
 package com.coderscampus.chatapp.a14.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,10 @@ public class ChannelService {
 	public Long assignUserId() {
 		return channelRepo.generateChannelId();
 		
+	}
+	
+	public List<Channel> findAll(){
+		return channelRepo.findAll();
 	}
 	
 }

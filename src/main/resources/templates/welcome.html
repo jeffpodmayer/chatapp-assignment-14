@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
+
 <head>
 	<title>Welcome</title>
 </head>
+
 <body>
 	<h3>Choose a Channel to Start Chatting!</h3>
-	
-	<a href="#" onclick="joinOrCreateChannel()">General Channel</a>
-	
-	<script type ="text/javascript" src="/js/welcome.js"></script>
+	<div>
+		<a href="#" onclick="joinOrCreateGeneralChannel()">General Channel</a>
+	</div>
+
+	<script type="text/javascript" src="/js/welcome.js"></script>
 </body>
+
 </html>

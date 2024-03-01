@@ -27,6 +27,10 @@ public class ChannelRepository {
 		}
 		return null;
 	}
+	
+	public List<Channel> findAll() {
+		return channels;
+	}
 
 	public synchronized Long generateChannelId() {
 		return channels.size() + 1L;

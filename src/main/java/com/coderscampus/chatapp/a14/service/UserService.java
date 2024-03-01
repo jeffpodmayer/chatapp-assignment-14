@@ -16,21 +16,19 @@ public class UserService {
 		return userRepo.save(user);
 	}
 	
-	public User findbyUserId(Long userId) {
-		return userRepo.findById(userId);
-	}
-	
-	public User findByUsername(User sender) {// DUPLICATE
-		return userRepo.findByUsername(sender);
-	}
-	
 	public Long assignUserId() {
 		return userRepo.generateUserId();
-		
 	}
-
+	
+//	public User findbyUserId(Long userId) {
+//		return userRepo.findById(userId);
+//	}
+//	
+//	public User findByUsername(User sender) {// DUPLICATE
+//		return userRepo.findByUsername(sender);
+//	}
+	
 	public User findByUsername(String username) { //DUPLICATE
-		// TODO Auto-generated method stub
 		return userRepo.findByUsername(username);
 	}
 }
