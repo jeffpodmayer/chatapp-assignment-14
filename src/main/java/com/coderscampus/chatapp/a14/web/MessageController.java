@@ -1,5 +1,6 @@
 package com.coderscampus.chatapp.a14.web;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,12 @@ public class MessageController {
 	}
 	
 	@GetMapping("/getNewMessages/{channelId}")
+	@ResponseBody
 	public List<Message> getNewMessagesForChannel(@PathVariable Long channelId) {
-		List<Message> messages = messageService.findMessagesByChannel(channelId);
+		Channel channel = channelService.findByChannelId(channelId);
+		List<Message> messages = channel.getMessages();
+		messages.sort(Comparator.comparing(Message::getTimestamp));
 		System.out.println(messages.toString());
-		return messages;
+		return messages;  
 	}
 }

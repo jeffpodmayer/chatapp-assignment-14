@@ -1,23 +1,39 @@
 package com.coderscampus.chatapp.a14.domain;
 
+import java.time.LocalDateTime;
+
 public class Message {
 	private Long messageId;
 	private User sender;
 	private Long channelId;
 	private String messageBody;
+	private LocalDateTime timestamp;
 
-	public Message(Long messageId, User sender, Long channelId, String messageBody) {
+	@Override
+	public String toString() {
+		return "Message [messageId=" + messageId + ", sender=" + sender + ", channelId=" + channelId + ", messageBody="
+				+ messageBody + ", timestamp=" + timestamp + "]";
+	}
+
+	public Message(Long messageId, User sender, Long channelId, String messageBody, LocalDateTime timestamp) {
 		super();
 		this.messageId = messageId;
 		this.sender = sender;
 		this.channelId = channelId;
 		this.messageBody = messageBody;
+		this.timestamp = timestamp;
 	}
 
-	@Override
-	public String toString() {
-		return "Message [messageId=" + messageId + ", sender=" + sender + ", channelId=" + channelId + ", messageBody="
-				+ messageBody + "]";
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public void setChannelId(Long channelId) {
+		this.channelId = channelId;
 	}
 
 	public User getSender() {

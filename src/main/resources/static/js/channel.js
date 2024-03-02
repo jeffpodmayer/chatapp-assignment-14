@@ -10,6 +10,7 @@ console.log("User on channel: " + senderName);
 console.log("UserId of User on channel: " + senderId);
 console.log("Current Channel you are on: " + channelId);
 
+//SENDS MESSAGE WHEN "ENTER" IS PRESSED.
 messageToSend.addEventListener('keydown', (event) => {
 	if (event.key === "Enter") {
 		event.preventDefault();
@@ -20,12 +21,12 @@ messageToSend.addEventListener('keydown', (event) => {
 function sendMessage() {
 	var message = {
 		sender: {
-			userId: senderId, 
-			username : senderName
-			},
+			userId: senderId,
+			username: senderName
+		},
 		channel: channelId,
 		messageBody: messageToSend.value.trim(),
-		timeStamp: new Date().toISOString()
+		timestamp: new Date().toISOString()
 	};
 
 	if (message.messageBody !== '') {
@@ -34,7 +35,7 @@ function sendMessage() {
 
 		console.log("You sent a message");
 	}
-	
+
 	fetch(`/sendMessage/${channelId}`, {
 		method: "POST",
 		headers: {
@@ -50,17 +51,33 @@ function sendMessage() {
 
 }
 
-function displayNewMessages(messages) {
+//DISPLAYS NEW MESSAGES EVERY SECOND
+var lastFetchedTimestamp = null;
+
+function fetchNewMessages() {
 	fetch(`/getNewMessages/${channelId}`)
 		.then(response => response.json())
-		.then(messages.forEach(message => {
-			const messageElement = document.createElement('p');
-			messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
-			chatBox.append(messageElement);
-		}));
+		.then(messages => {
+			// Filtering messages based on timestamp
+			const newMessages = messages.filter(message => {
+				return message.timeStamp > lastFetchedTimestamp;
+			});
+
+			// Updating the last fetched timestamp
+			if (messages.length > 0) {
+				lastFetchedTimestamp = messages[messages.length - 1].timeStamp;
+			}
+
+			// Displaying new messages in the chatBox
+			newMessages.forEach(message => {
+				const messageElement = document.createElement('p');
+				messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
+				chatBox.append(messageElement);
+			});
+		});
 }
 
-setInterval(displayNewMessages, 1000);
+setInterval(fetchNewMessages, 1000);
 
 
 
