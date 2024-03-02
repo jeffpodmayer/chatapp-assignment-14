@@ -52,20 +52,21 @@ function sendMessage() {
 }
 
 //DISPLAYS NEW MESSAGES EVERY SECOND
-var lastFetchedTimestamp = null;
+var lastFetchedTimestamp = new Date().toISOString() ;
 
 function fetchNewMessages() {
+	console.log("Fetching new messages....");
 	fetch(`/getNewMessages/${channelId}`)
 		.then(response => response.json())
 		.then(messages => {
 			// Filtering messages based on timestamp
-			const newMessages = messages.filter(message => {
+			var newMessages = messages.filter(message => {
 				return message.timeStamp > lastFetchedTimestamp;
 			});
 
 			// Updating the last fetched timestamp
 			if (messages.length > 0) {
-				lastFetchedTimestamp = messages[messages.length - 1].timeStamp;
+				lastFetchedTimestamp = messages[messages.length-1].timeStamp;
 			}
 
 			// Displaying new messages in the chatBox
@@ -75,7 +76,10 @@ function fetchNewMessages() {
 				chatBox.append(messageElement);
 			});
 		});
+		console.log("Messages fetched!")
 }
+
+fetchNewMessages();
 
 setInterval(fetchNewMessages, 1000);
 

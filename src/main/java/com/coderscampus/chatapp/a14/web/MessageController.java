@@ -40,8 +40,8 @@ public class MessageController {
 	public List<Message> getNewMessagesForChannel(@PathVariable Long channelId) {
 		Channel channel = channelService.findByChannelId(channelId);
 		List<Message> messages = channel.getMessages();
-		messages.sort(Comparator.comparing(Message::getTimestamp));
-		System.out.println(messages.toString());
-		return messages;  
+		messages.sort(Comparator.comparing(Message::getTimestamp).reversed());  
+		return messages;
+				
 	}
 }

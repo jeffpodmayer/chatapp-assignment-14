@@ -12,24 +12,24 @@ import com.coderscampus.chatapp.a14.repository.MessageRepository;
 
 @Service
 public class MessageService {
-	
-	@Autowired 
+
+	@Autowired
 	private MessageRepository messageRepo;
-	
-	@Autowired 
+
+	@Autowired
 	private ChannelRepository channelRepo;
-	
+
 	public Message saveMessage(Message message) {
 		return messageRepo.save(message);
 	}
-	
+
 	public List<Message> findMessagesByChannel(Long channelId) {
 		Channel channel = channelRepo.findByChannelId(channelId);
 		return channel.getMessages();
 	}
-	
+
 	public Long assignMessageId() {
 		return messageRepo.generateMessageId();
-		
+
 	}
 }

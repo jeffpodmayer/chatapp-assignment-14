@@ -1,7 +1,5 @@
 package com.coderscampus.chatapp.a14.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -86,20 +84,4 @@ public class ChannelController {
 		}
 		return channel;
 	}
-
-	
-	
-	
-
-//	@GetMapping("/getChannelId")
-//	@ResponseBody
-//	public Channel getChannelId(@RequestParam Long channelId) {
-//		if(channelId == null) {
-//			return null;
-//		} else {
-//		Channel channelIdToFind = channelService.findByChannelId(channelId);
-//		System.out.println("Channel found is: " + channelIdToFind);
-//		return channelIdToFind;
-//		}
-//	}
 }

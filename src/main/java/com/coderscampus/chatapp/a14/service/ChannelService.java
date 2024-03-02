@@ -10,25 +10,25 @@ import com.coderscampus.chatapp.a14.repository.ChannelRepository;
 
 @Service
 public class ChannelService {
-	
-	@Autowired 
+
+	@Autowired
 	private ChannelRepository channelRepo;
-	
+
 	public Channel saveChannel(Channel channel) {
 		return channelRepo.save(channel);
 	}
-	
+
 	public Channel findByChannelId(Long channelId) {
 		return channelRepo.findByChannelId(channelId);
 	}
-	
+
 	public Long assignUserId() {
 		return channelRepo.generateChannelId();
-		
+
 	}
-	
-	public List<Channel> findAll(){
+
+	public List<Channel> findAll() {
 		return channelRepo.findAll();
 	}
-	
+
 }
