@@ -1,5 +1,6 @@
 package com.coderscampus.chatapp.a14.domain;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class Message {
@@ -7,7 +8,7 @@ public class Message {
 	private User sender;
 	private Long channelId;
 	private String messageBody;
-	private LocalDateTime timestamp;
+	private Instant timestamp;
 
 	@Override
 	public String toString() {
@@ -15,7 +16,7 @@ public class Message {
 				+ messageBody + ", timestamp=" + timestamp + "]";
 	}
 
-	public Message(Long messageId, User sender, Long channelId, String messageBody, LocalDateTime timestamp) {
+	public Message(Long messageId, User sender, Long channelId, String messageBody, Instant timestamp) {
 		super();
 		this.messageId = messageId;
 		this.sender = sender;
@@ -24,11 +25,11 @@ public class Message {
 		this.timestamp = timestamp;
 	}
 
-	public LocalDateTime getTimestamp() {
+	public Instant getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(LocalDateTime timestamp) {
+	public void setTimestamp(Instant timestamp) {
 		this.timestamp = timestamp;
 	}
 
