@@ -1,16 +1,23 @@
-var messageToSend = document.getElementById("messageBox");
-
-var chatBox = document.querySelector("#chatBox");
-
 var senderName = sessionStorage.getItem('username');
 var senderId = sessionStorage.getItem('userId');
 var channelId = sessionStorage.getItem('channelId');
 
-console.log("User on channel: " + senderName);
-console.log("UserId of User on channel: " + senderId);
-console.log("Current Channel you are on: " + channelId);
+checkIfUserExistsInSession();
+
+function checkIfUserExistsInSession() {
+	if (sessionStorage.getItem('username') === "null" || sessionStorage.getItem('username') === null) {
+		return window.location.replace("http://localhost:8080/welcome")
+	} else {
+		console.log("User on channel: " + senderName);
+		console.log("UserId of User on channel: " + senderId);
+		console.log("Current Channel you are on: " + channelId);
+	}
+}
 
 //SENDS MESSAGE WHEN "ENTER" IS PRESSED.
+var messageToSend = document.getElementById("messageBox");
+var chatBox = document.querySelector("#chatBox");
+
 messageToSend.addEventListener('keydown', (event) => {
 	if (event.key === "Enter") {
 		event.preventDefault();
@@ -52,36 +59,41 @@ function sendMessage() {
 }
 
 //DISPLAYS NEW MESSAGES EVERY SECOND
-var lastFetchedTimestamp = new Date().toISOString() ;
-
 function fetchNewMessages() {
-	console.log("Fetching new messages....");
+	const previousMessages = JSON.parse(localStorage.getItem("messages"));
+	console.log("Fetching new messages...")
 	fetch(`/getNewMessages/${channelId}`)
-		.then(response => response.json())
-		.then(messages => {
-			// Filtering messages based on timestamp
-			var newMessages = messages.filter(message => {
-				return message.timeStamp > lastFetchedTimestamp;
+		.then((response) => response.json())
+		.then((messages) => {
+			const newMessages = messages.filter((message) => {
+				return message.channelId == channelId;
 			});
+			if (newMessages.length > previousMessages?.length)
+				renderMessages(newMessages);
 
-			// Updating the last fetched timestamp
-			if (messages.length > 0) {
-				lastFetchedTimestamp = messages[messages.length-1].timeStamp;
-			}
+			localStorage.setItem("messages", JSON.stringify(newMessages));
 
-			// Displaying new messages in the chatBox
-			newMessages.forEach(message => {
-				const messageElement = document.createElement('p');
-				messageElement.textContent = `${message.senderName} : ${message.messageBody}`;
-				chatBox.append(messageElement);
-			});
 		});
-		console.log("Messages fetched!")
+}
+function renderMessages(newMessages) {
+	chatBox.innerHTML = "";
+
+	//ADD A sort to the newMessages array.
+
+	newMessages.forEach((message) => {
+		const messageElement = document.createElement('p');
+		messageElement.textContent = `${message.sender.username} : ${message.messageBody}`;
+		chatBox.append(messageElement);
+	});
 }
 
-fetchNewMessages();
+setInterval(fetchNewMessages, 500);
 
-setInterval(fetchNewMessages, 1000);
+document.addEventListener("DOMContentLoaded", () => {
+	fetchNewMessages();
+	const messagesFromLocalStorage = JSON.parse(localStorage.getItem("messages"));
+	renderMessages(messagesFromLocalStorage);
+});
 
 
 
