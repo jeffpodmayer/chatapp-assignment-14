@@ -78,8 +78,6 @@ function fetchNewMessages() {
 function renderMessages(newMessages) {
 	chatBox.innerHTML = "";
 
-	//ADD A sort to the newMessages array.
-
 	newMessages.forEach((message) => {
 		const messageElement = document.createElement('p');
 		messageElement.textContent = `${message.sender.username} : ${message.messageBody}`;
