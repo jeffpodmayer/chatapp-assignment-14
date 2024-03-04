@@ -58,9 +58,9 @@ function sendMessage() {
 
 }
 
-//DISPLAYS NEW MESSAGES EVERY SECOND
+//DISPLAYS NEW MESSAGES EVERY 500 MILLISECONDS
 function fetchNewMessages() {
-	const previousMessages = JSON.parse(localStorage.getItem("messages"));
+	const previousMessages = JSON.parse(localStorage.getItem("messages")) || [];
 	console.log("Fetching new messages...")
 	fetch(`/getNewMessages/${channelId}`)
 		.then((response) => response.json())
@@ -68,8 +68,12 @@ function fetchNewMessages() {
 			const newMessages = messages.filter((message) => {
 				return message.channelId == channelId;
 			});
-			if (newMessages.length > previousMessages?.length)
-				renderMessages(newMessages);
+
+			console.log(newMessages.length);
+			console.log(previousMessages.length);
+
+			if (newMessages.length > previousMessages?.length) { }
+			renderMessages(newMessages);
 
 			localStorage.setItem("messages", JSON.stringify(newMessages));
 
@@ -89,8 +93,12 @@ setInterval(fetchNewMessages, 500);
 
 document.addEventListener("DOMContentLoaded", () => {
 	fetchNewMessages();
-	const messagesFromLocalStorage = JSON.parse(localStorage.getItem("messages"));
-	renderMessages(messagesFromLocalStorage);
+	const messagesFromLocalStorage = JSON.parse(localStorage.getItem("messages")) || [];
+
+	if (messagesFromLocalStorage > 0) {
+		renderMessages(messagesFromLocalStorage);
+	}
+
 });
 
 

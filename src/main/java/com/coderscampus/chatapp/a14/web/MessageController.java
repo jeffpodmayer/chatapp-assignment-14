@@ -31,7 +31,7 @@ public class MessageController {
 		message = messageService.saveMessage(message);
 		Channel channel = channelService.findByChannelId(channelId);
 		channel.getMessages().add(message);
-		System.out.println(channel);
+//		System.out.println(channel);
 		return message;
 	}
 	
