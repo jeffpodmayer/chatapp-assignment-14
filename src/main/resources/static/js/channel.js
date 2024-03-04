@@ -38,8 +38,6 @@ function sendMessage() {
 	if (message.messageBody !== '') {
 		chatBox.innerHTML += '<p>' + '<strong>' + senderName + ": " + '</strong>' + message.messageBody + '</p>';
 		messageToSend.value = '';
-
-		console.log("You sent a message");
 	}
 
 	fetch(`/sendMessage/${channelId}`, {
@@ -52,7 +50,6 @@ function sendMessage() {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log(data);
-			console.log("Message saved on server side!")
 		});
 
 }
@@ -60,7 +57,6 @@ function sendMessage() {
 //DISPLAYS NEW MESSAGES EVERY 500 MILLISECONDS
 function fetchNewMessages() {
 	const previousMessages = JSON.parse(localStorage.getItem("messages")) || [];
-	console.log("Fetching new messages...")
 	fetch(`/getNewMessages/${channelId}`)
 		.then((response) => response.json())
 		.then((messages) => {
@@ -68,8 +64,8 @@ function fetchNewMessages() {
 				return message.channelId == channelId;
 			});
 
-			console.log(newMessages.length);
-			console.log(previousMessages.length);
+//			console.log(newMessages.length);
+//			console.log(previousMessages.length);
 
 			if (newMessages.length > previousMessages?.length) { }
 			renderMessages(newMessages);

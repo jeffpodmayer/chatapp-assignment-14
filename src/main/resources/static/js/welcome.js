@@ -29,7 +29,7 @@ function createUser() {
 			sessionStorage.setItem('username', username);
 			sessionStorage.setItem('userId', userId);
 			console.log(data);
-			console.log("User sent and saved!");
+//			console.log("User sent and saved!");
 		});
 }
 
@@ -42,7 +42,7 @@ function joinOrCreateGeneralChannel() {
 		.then(data => {
 			const channelId = data.channelId;
 			sessionStorage.setItem('channelId', channelId);
-			console.log("User has joined the channel!");
+//			console.log("User has joined the channel!");
 			console.log(data);
 			joinChannel(1);
 		});
@@ -57,7 +57,7 @@ function joinOrCreateChannel2() {
 		.then(data => {
 			const channelId = data.channelId;
 			sessionStorage.setItem('channelId', channelId);
-			console.log("User has joined the channel!");
+//			console.log("User has joined the channel!");
 			console.log(data);
 			joinChannel(2);
 		});
