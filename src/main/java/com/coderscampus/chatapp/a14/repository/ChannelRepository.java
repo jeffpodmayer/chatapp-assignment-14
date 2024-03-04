@@ -13,7 +13,7 @@ public class ChannelRepository {
 	private List<Channel> channels = new ArrayList<>();
 
 	public Channel save(Channel newChannel) {
-		newChannel.setChannelId(generateChannelId());
+	//	newChannel.setChannelId(generateChannelId());
 		newChannel.setUsers(new ArrayList<>());
         newChannel.setMessages(new ArrayList<>());
         channels.add(newChannel);
@@ -32,7 +32,7 @@ public class ChannelRepository {
 		return channels;
 	}
 
-	public synchronized Long generateChannelId() {
-		return channels.size() + 1L;
-	}
+//	public synchronized Long generateChannelId() {
+//		return channels.size() + 1L;
+//	}
 }

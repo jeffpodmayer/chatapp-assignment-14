@@ -22,10 +22,10 @@ public class ChannelService {
 		return channelRepo.findByChannelId(channelId);
 	}
 
-	public Long assignUserId() {
-		return channelRepo.generateChannelId();
-
-	}
+//	public Long assignUserId() {
+//		return channelRepo.generateChannelId();
+//
+//	}
 
 	public List<Channel> findAll() {
 		return channelRepo.findAll();
