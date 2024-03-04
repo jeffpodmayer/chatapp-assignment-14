@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.chatapp.a14.domain.Channel;
-//import com.coderscampus.chatapp.a14.domain.Message;
 import com.coderscampus.chatapp.a14.domain.User;
 import com.coderscampus.chatapp.a14.service.ChannelService;
 import com.coderscampus.chatapp.a14.service.UserService;
-//import com.coderscampus.chatapp.a14.service.MessageService;
 
 @Controller
 public class ChannelController {
@@ -25,9 +23,6 @@ public class ChannelController {
 
 	@Autowired
 	private UserService userService;
-
-//	@Autowired
-//	private MessageService messageService;
 
 	@PostMapping("/createChannel")
 	public Channel createNewChannel() {
@@ -42,26 +37,15 @@ public class ChannelController {
 		Channel existingChannel = channelService.findByChannelId(1L);
 
 		if (existingChannel == null) {
-
-			// If no channel exists, create a new one;
-			System.out.println("Creating a General Channel!");
 			Channel newChannel = createNewChannel();
 			newChannel.setChannelId(1L);
-
-			// Add the user to the new channel
 			User user = userService.findByUsername(username);
 			newChannel.getUsers().add(user);
-
-			System.out.println(newChannel.toString());
-
 			return newChannel;
 
 		} else {
-			System.out.println("Adding a user to the General Channel.");
 			User user = userService.findByUsername(username);
 			existingChannel.getUsers().add(user);
-
-			System.out.println(existingChannel.toString());
 			return existingChannel;
 		}
 	}
@@ -84,7 +68,6 @@ public class ChannelController {
 		}
 	}
 
-	// GETS THE MODEL
 	@GetMapping("/channel/{channelId}")
 	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
 		Channel channel = channelService.findByChannelId(channelId);
@@ -92,7 +75,6 @@ public class ChannelController {
 		return "channel";
 	}
 
-	// POSTS THE CHANNEL DATA FROM THE JS: joinChannel(channelId) function
 	@PostMapping("/joinChannel/{channelId}")
 	@ResponseBody
 	public Channel joinChannel(@RequestBody Channel channelData, @PathVariable Long channelId) {

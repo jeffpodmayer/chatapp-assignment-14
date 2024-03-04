@@ -7,12 +7,11 @@ public class Message {
 	private User sender;
 	private Long channelId;
 	private String messageBody;
-	private Instant timestamp;
 
 	@Override
 	public String toString() {
 		return "Message [messageId=" + messageId + ", sender=" + sender + ", channelId=" + channelId + ", messageBody="
-				+ messageBody + ", timestamp=" + timestamp + "]";
+				+ messageBody + "]";
 	}
 
 	public Message(Long messageId, User sender, Long channelId, String messageBody, Instant timestamp) {
@@ -21,15 +20,6 @@ public class Message {
 		this.sender = sender;
 		this.channelId = channelId;
 		this.messageBody = messageBody;
-		this.timestamp = timestamp;
-	}
-
-	public Instant getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Instant timestamp) {
-		this.timestamp = timestamp;
 	}
 
 	public void setChannelId(Long channelId) {

@@ -15,7 +15,6 @@ public class UserRepository {
 	public User save(User user) {
 		user.setUserId(generateUserId());
 		users.add(user);
-		System.out.print("Users in the list are: " + users.toString());
 		return user;
 	}
 

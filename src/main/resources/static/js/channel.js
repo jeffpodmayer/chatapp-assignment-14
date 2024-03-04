@@ -33,7 +33,6 @@ function sendMessage() {
 		},
 		channel: channelId,
 		messageBody: messageToSend.value.trim(),
-		timestamp: new Date().toISOString()
 	};
 
 	if (message.messageBody !== '') {
@@ -91,6 +90,8 @@ function renderMessages(newMessages) {
 
 setInterval(fetchNewMessages, 500);
 
+
+//LOADS ALL NEW MESSAGES WHEN NEW USER JOINS PAGE
 document.addEventListener("DOMContentLoaded", () => {
 	fetchNewMessages();
 	const messagesFromLocalStorage = JSON.parse(localStorage.getItem("messages")) || [];

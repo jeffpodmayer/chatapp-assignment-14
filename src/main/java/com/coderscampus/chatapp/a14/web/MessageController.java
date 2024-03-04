@@ -1,6 +1,5 @@
 package com.coderscampus.chatapp.a14.web;
 
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ public class MessageController {
 		message = messageService.saveMessage(message);
 		Channel channel = channelService.findByChannelId(channelId);
 		channel.getMessages().add(message);
-//		System.out.println(channel);
 		return message;
 	}
 	
