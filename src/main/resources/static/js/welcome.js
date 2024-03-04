@@ -13,7 +13,6 @@ if (!username) {
 }
 
 
-
 //CREATES A USER
 function createUser() {
 	fetch(`/createUser`, {
