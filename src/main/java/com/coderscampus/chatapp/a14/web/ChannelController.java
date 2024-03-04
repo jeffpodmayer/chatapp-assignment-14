@@ -25,7 +25,7 @@ public class ChannelController {
 
 	@Autowired
 	private UserService userService;
-	
+
 //	@Autowired
 //	private MessageService messageService;
 
@@ -35,11 +35,10 @@ public class ChannelController {
 		channelService.saveChannel(channel);
 		return channel;
 	}
-	
+
 	@PostMapping("/joinOrCreateGeneralChannel")
 	@ResponseBody
 	public Channel joinOrCreateGeneralChannel(@RequestParam String username) {
-		// Check if a channel exists
 		Channel existingChannel = channelService.findByChannelId(1L);
 
 		if (existingChannel == null) {
@@ -47,6 +46,7 @@ public class ChannelController {
 			// If no channel exists, create a new one;
 			System.out.println("Creating a General Channel!");
 			Channel newChannel = createNewChannel();
+			newChannel.setChannelId(1L);
 
 			// Add the user to the new channel
 			User user = userService.findByUsername(username);
@@ -66,19 +66,38 @@ public class ChannelController {
 		}
 	}
 
-	//GETS THE MODEL 
+	@PostMapping("/joinOrCreateChannel2")
+	@ResponseBody
+	public Channel joinOrCreateChannel2(@RequestParam String username) {
+		Channel existingChannel = channelService.findByChannelId(2L);
+		if (existingChannel == null) {
+			Channel newChannel = createNewChannel();
+			newChannel.setChannelId(2L);
+			User user = userService.findByUsername(username);
+			newChannel.getUsers().add(user);
+			return newChannel;
+
+		} else {
+			User user = userService.findByUsername(username);
+			existingChannel.getUsers().add(user);
+			return existingChannel;
+		}
+	}
+
+	// GETS THE MODEL
 	@GetMapping("/channel/{channelId}")
 	public String viewChannelByChannelId(@PathVariable Long channelId, ModelMap model) {
 		Channel channel = channelService.findByChannelId(channelId);
 		model.put("channel", channel);
 		return "channel";
 	}
-	//POSTS THE CHANNEL DATA FROM THE JS: joinChannel(channelId) function
+
+	// POSTS THE CHANNEL DATA FROM THE JS: joinChannel(channelId) function
 	@PostMapping("/joinChannel/{channelId}")
 	@ResponseBody
 	public Channel joinChannel(@RequestBody Channel channelData, @PathVariable Long channelId) {
 		Channel channel = channelData;
-		
+
 		if (channel == null) {
 			System.out.println(channel);
 		}
