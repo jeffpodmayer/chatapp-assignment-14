@@ -29,7 +29,6 @@ function createUser() {
 			sessionStorage.setItem('username', username);
 			sessionStorage.setItem('userId', userId);
 			console.log(data);
-//			console.log("User sent and saved!");
 		});
 }
 
